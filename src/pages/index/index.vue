@@ -44,33 +44,75 @@
         </view>
         <view class="goods-box">
             <view class="title">油漆系列</view>
-            <view class="cu-list grid col-4 no-border">
-                <view class="cu-item">
-                    <view class="text-red">
-                        <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    </view>
-                    <text>vr</text>
+            <scroll-view class="scroll-view_H" scroll-x="true" scroll-left="120" @scroll="scroll">
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
                 </view>
-                <view class="cu-item">
-                    <view class="cuIcon-cardboardfill text-red">
-                        <view class="cu-tag " />
-                    </view>
-                    <text>vr</text>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
                 </view>
-                <view class="cu-item">
-                    <view class="cuIcon-cardboardfill text-red">
-                        <view class="cu-tag " />
-                    </view>
-                    <text>vr</text>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
                 </view>
-                <view class="cu-item">
-                    <view class="cuIcon-cardboardfill text-red">
-                        <view class="cu-tag " />
-                    </view>
-                    <text>vr</text>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
                 </view>
-            </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+            </scroll-view>
         </view>
+        <view class="goods-box">
+            <view class="title">油漆系列</view>
+            <scroll-view class="scroll-view_H" scroll-x="true" scroll-left="120" @scroll="scroll">
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+                <view class="scroll-view-item_H goods-list">
+                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
+                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+                    <text class="text-price text-red">80.00</text>
+                </view>
+            </scroll-view>
+        </view>
+
     </view>
 </template>
 
@@ -135,7 +177,6 @@ export default {
 	.scroll-view_H {
 		white-space: nowrap;
 		width: 100%;
-        background-color: red;
 	}
 	.scroll-view-item {
 		height: 100px;
@@ -166,6 +207,9 @@ export default {
         background-color: #fff;
         margin-top: 10px;
     }
+    .goods-box:last-child{
+        margin-bottom: 10px;
+    }
     .goods-box .title{
         font-size: 20px;
         font-weight: bold;
@@ -173,6 +217,25 @@ export default {
         padding: 10px;
     }
     .goods-box img{
-        height: 100%;
+        width: 78px;
+        height: 75px;
+        display: block;
+    }
+    .goods-box .name{
+        height: 18px;
+        line-height: 18px;
+        overflow: hidden;
+        font-size: 14px;
+        display: block;
+    }
+    .goods-box .text-price{
+        display: block;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .goods-box .goods-list{
+        width: 100px;
+        padding: 10px;
+        height: 130px;
     }
 </style>
