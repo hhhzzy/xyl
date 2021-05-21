@@ -44,7 +44,7 @@
         </view>
         <view class="goods-box">
             <view class="title">油漆系列</view>
-            <scroll-view class="scroll-view_H" scroll-x="true" scroll-left="120" @scroll="scroll">
+            <scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll">
                 <view class="scroll-view-item_H goods-list">
                     <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
                     <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
@@ -117,6 +117,7 @@
 </template>
 
 <script>
+import ajax from '@/utils/http.js'
 export default {
     data() {
         return {
@@ -157,6 +158,10 @@ export default {
     },
     onLoad() {
         // 初始化towerSwiper 传已有的数组名即可
+        console.log(ajax, 5555555555)
+        ajax.get('/Mall/getGoodsType').then(res => {
+            console.log(res, 94)
+        })
     },
     onShow() {
     },

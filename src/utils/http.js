@@ -1,10 +1,10 @@
 import axios from 'axios'
 // import { Message, MessageBox } from 'element-ui'
-import url from './url'
+// import url from './url'
 // import router from '../router'
 
 const ajax = axios.create({
-    baseURL: url, // 请求地址
+    baseURL: 'http://39.106.46.66', // 请求地址
     timeout: 30000 // 请求超时
 })
 let requestNum = 0 // 请求的数量
