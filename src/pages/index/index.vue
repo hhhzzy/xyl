@@ -42,73 +42,18 @@
                 </view>
             </view>
         </view>
-        <view class="goods-box">
-            <view class="title">油漆系列</view>
+        <view v-for="(item,index) in typeArr" :key="index" class="goods-box">
+            <view class="title">{{ item.typeName }}</view>
             <scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll">
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
+                <view v-if="item.goods && item.goods.length">
+                    <view v-for="(ele,ind) in item.goods" :key="ind" class="scroll-view-item_H goods-list">
+                        <img :src="url+ele.GoodsImgs" alt="" />
+                        <text class="name">{{ ele.GoodsName }}</text>
+                        <text class="text-price text-red">{{ ele.ShopPrice }}</text>
+                    </view>
                 </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-            </scroll-view>
-        </view>
-        <view class="goods-box">
-            <view class="title">油漆系列</view>
-            <scroll-view class="scroll-view_H" scroll-x="true" scroll-left="120" @scroll="scroll">
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
-                </view>
-                <view class="scroll-view-item_H goods-list">
-                    <img src="https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg" alt="" />
-                    <text class="name">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
-                    <text class="text-price text-red">80.00</text>
+                <view v-else class="view-no-text">
+                    暂无商品！
                 </view>
             </scroll-view>
         </view>
@@ -118,6 +63,7 @@
 
 <script>
 import ajax from '@/utils/http.js'
+import { url } from '@/utils/url.js'
 export default {
     data() {
         return {
@@ -153,15 +99,19 @@ export default {
             scrollTop: 0,
             old: {
                 scrollTop: 0
-            }
+            },
+            typeArr: [
+
+            ],
+            url: url
         }
     },
-    onLoad() {
+    async onLoad() {
         // 初始化towerSwiper 传已有的数组名即可
-        console.log(ajax, 5555555555)
-        ajax.get('/Mall/getGoodsType').then(res => {
-            console.log(res, 94)
-        })
+
+        await this.getGoodsTypeList()
+        this.getGoods()
+        console.log(555)
     },
     onShow() {
     },
@@ -169,6 +119,35 @@ export default {
         scroll: function(e) {
             console.log(e)
             this.old.scrollTop = e.detail.scrollTop
+        },
+        // 获取商品类别
+        getGoodsTypeList() {
+            return new Promise((resolve, reject) => {
+                ajax.get('/Mall/InquireGoodType?typeLevel=1&showIndex=1').then(res => {
+                    if (res.data.code === 200) {
+                        res.data.result.forEach(item => {
+                            this.typeArr.push({
+                                typeName: item.CategoryName,
+                                typeId: item.CategoryId
+                            })
+                        })
+                    }
+                    resolve()
+                    console.log(this.typeArr)
+                })
+            })
+        },
+        // 获取商品列表
+        getGoods() {
+            if (this.typeArr && this.typeArr.length) {
+                this.typeArr.forEach((item, index) => {
+                    console.log(item.typeId)
+                    ajax.get('/Mall/getGoodsList?pageIndex=1&pageSize=1000&showIndex=1&typeId=' + item.typeId + '&typeLevel=1').then(res => {
+                        this.$set(this.typeArr[index], 'goods', res.data.result.goodsList)
+                        console.log(this.typeArr)
+                    })
+                })
+            }
         }
     }
 }
@@ -242,5 +221,10 @@ export default {
         width: 100px;
         padding: 10px;
         height: 130px;
+    }
+    .view-no-text{
+        text-align: center;
+        margin: 15px 0;
+        height: 50px;
     }
 </style>

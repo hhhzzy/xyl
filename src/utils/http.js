@@ -1,98 +1,95 @@
+// http.js
 import axios from 'axios'
-// import { Message, MessageBox } from 'element-ui'
-// import url from './url'
-// import router from '../router'
-
+const url = 'http://39.106.46.66' // 环境配置中的接口地址
+// const url = 'http://47.108.67.109/'; // 环境配置中的接口地址
 const ajax = axios.create({
-    baseURL: 'http://39.106.46.66', // 请求地址
+    baseURL: url, // 请求地址
     timeout: 30000 // 请求超时
 })
-let requestNum = 0 // 请求的数量
-ajax.defaults.headers.post['Content-Type'] = 'application/json' // post 的 请求头设置
+let loginToast = 0
+ajax.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8' // post 的 请求头设置
+// 自定义请求
+ajax.defaults.adapter = function(config) {
+    return new Promise((resolve, reject) => {
+        // console.log(config)
+        // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
+        let header = {}
+        if (wx.getStorageSync('token')) {
+            header = {
+                'content-type': 'application/json', // 默认值
+                'token': `${wx.getStorageSync('token')}`
+            }
+        } else {
+            header = {
+                'content-type': 'application/json'// 默认值
+            }
+        }
+        wx.request({
+            url: url + config.url,
+            method: config.method,
+            data: config.data,
+            header: header,
+            success: (res) => {
+                if (res.data.code === -1) {
+                // mpvue.navigateTo({
+                //     url: '../authorize/main'
+                // })
+                    loginToast++
+                    console.log(loginToast)
+                    if (loginToast === 1) {
+                        wx.showModal({
+                            title: '提示',
+                            content: '为获取更好的服务，请先登录使用！',
+                            cancelText: '暂不登录',
+                            confirmText: '登录',
+                            success: function(res) {
+                                if (res.confirm) {
+                                    uni.navigateTo({
+                                        url: '../authorize/main'
+                                    })
+                                }
+                                loginToast = 0
+                            }
+                        })
+                    }
+                    // wx.setStorageSync('boolLogin','1');
+                    // mpvue.switchTab({
+                    //     url: '../mine/main'
+                    // })
+                    return resolve(res)
+                } else {
+                    return resolve(res)
+                }
+            },
+            fail: (err) => {
+                return reject(err)
+            }
+        })
+    })
+}
 // 请求拦截
 ajax.interceptors.request.use(config => {
     // 每次请求之前判断vuex中的token是否存在（也可以存在stroge里面）
     // 如果存在，则统一在请求的header中加上token，后台判断是否登录
     // 即使存在token，也有可能过期，所以在响应拦截中也要判断状态
-    const token = localStorage.getItem('token')
-    token && (config.headers.Authorization = 'Bearer' + token) // jwt验证
-    // 全局loading
-    if (requestNum === 0) {
-        console.log('展示loading')
-    }
-    requestNum++
+    // const token =  wx.getStorageSync('token');
+    // console.log(wx.getStorageSync('token'),'666666')
+    // token && (config.headers.Authorization = 'Bearer' + token) // jwt验证
     return config
 }, error => {
-    return Promise.reject(error)
-})
+    return Promise.error(error)
+}
+)
 // 响应拦截
 ajax.interceptors.response.use(
-    (response) => {
-        // 隐藏loading
-        requestNum--
-        if (requestNum === 0) {
-            console.log('隐藏loading')
-        }
+    response => {
         return response
     },
     // 状态码提示
-    (err) => {
-        console.log(err)
-        if (err && err.response) {
-            switch (err.response.status) {
-                case 400:
-                    err.message = '请求错误(400)'
-                    break
-                case 401:
-                    // 到登录页面
-                    // router.push({
-                    //     path: 'login'
-                    // })
-                    err.message = '未授权，请重新登录(401)'
-                    break
-                case 403:
-                    // 删除token
-                    localStorage.removeItem('token')
-                    // 跳转到登录页面可以吧当前浏览的页面传过去，登录成功后返回当前页面
-                    // router.push({
-                    //     path: 'login',
-                    //     query: {
-                    //         redirect: router.currentRoute.fullPath
-                    //     }
-                    // })
-                    err.message = '拒绝访问(403)'
-                    break
-                case 404:
-                    err.message = '请求出错(404)'
-                    break
-                case 408:
-                    err.message = '请求超时(408)'
-                    break
-                case 500:
-                    err.message = '服务器错误(500)'
-                    break
-                case 501:
-                    err.message = '服务未实现(501)'
-                    break
-                case 502:
-                    err.message = '网络错误(502)'
-                    break
-                case 503:
-                    err.message = '服务不可用(503)'
-                    break
-                case 504:
-                    err.message = '网络超时(504)'
-                    break
-                case 505:
-                    err.message = 'HTTP版本不受支持(505)'
-                    break
-                default:
-                    err.message = `连接出错(${err.response.status})!`
-            }
-        } else {
-            err.message = '连接服务器失败!'
-        }
-        return Promise.reject(err.message)
+    error => {
+        wx.hideLoading()
+        return Promise.reject(error)
     }
 )
+
 export default ajax
